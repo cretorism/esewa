@@ -7,12 +7,10 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct ContentView: View {
     @State private var isLoggedIn: Bool
     @State private var showFlutterModule = false
-    @StateObject private var flutterManager = FlutterManager()
+    @StateObject private var flutterManager = FlutterManager.shared
     
     init() {
         _isLoggedIn = State(initialValue: AuthManager.shared.activeUser != nil)

@@ -1,15 +1,17 @@
 import Foundation
+import SwiftUI
+import Combine
 import Flutter
 import FlutterPluginRegistrant
 
-class FlutterManager: NSObject, ObservableObject {
-    static let shared = FlutterManager()
+public final class FlutterManager: NSObject {
+    public static let shared = FlutterManager()
     
-    var flutterEngine: FlutterEngine?
-    var methodChannel: FlutterMethodChannel?
+    @Published var flutterEngine: FlutterEngine?
+    @Published var methodChannel: FlutterMethodChannel?
     var onPaymentComplete: (() -> Void)?
     
-    private override init() {
+    public override init() {
         super.init()
         setupEngine()
     }
@@ -124,3 +126,5 @@ class FlutterManager: NSObject, ObservableObject {
         methodChannel?.invokeMethod("refreshConfig", arguments: buildAppConfig())
     }
 }
+
+extension FlutterManager: ObservableObject {}
