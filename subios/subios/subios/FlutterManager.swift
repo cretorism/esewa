@@ -17,28 +17,25 @@ public final class FlutterManager: NSObject {
     }
     
     func setupEngine() {
-        // Initialize Flutter Engine
-        flutterEngine = FlutterEngine(name: "esewa_flutter_engine")
+        // 1. Initialize Flutter Engine
+        let engine = FlutterEngine(name: "esewa_flutter_engine")
+        self.flutterEngine = engine
         
-        // Set up Method Channel BEFORE running the engine
-        if let engine = flutterEngine {
-            methodChannel = FlutterMethodChannel(
-                name: "com.app.native/flutter",
-                binaryMessenger: engine.binaryMessenger
-            )
-            
-            methodChannel?.setMethodCallHandler { [weak self] (call, result) in
-                self?.handleMethodCall(call, result: result)
-            }
+        // 2. Start the engine immediately
+        engine.run()
+        
+        // 3. Set up Method Channel AFTER running the engine
+        methodChannel = FlutterMethodChannel(
+            name: "com.app.native/flutter",
+            binaryMessenger: engine.binaryMessenger
+        )
+        
+        methodChannel?.setMethodCallHandler { [weak self] (call, result) in
+            self?.handleMethodCall(call, result: result)
         }
         
-        // Start the engine
-        flutterEngine?.run()
-        
-        // Register plugins
-        if let engine = flutterEngine {
-            GeneratedPluginRegistrant.register(with: engine)
-        }
+        // 4. Register plugins
+        GeneratedPluginRegistrant.register(with: engine)
     }
     
     private func handleMethodCall(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
