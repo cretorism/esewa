@@ -38,7 +38,7 @@ Icon?
 
 build/
 .android/
-.ios/
+
 .flutter-plugins-dependencies
 
 # Symbolication related
