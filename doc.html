@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hybrid App Documentation | Native + Flutter</title>
+    <title>eSewa Hybrid Project Documentation</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
         rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
-            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
             --secondary: #64748b;
             --bg: #f8fafc;
             --surface: #ffffff;
@@ -20,6 +20,8 @@
             --border: #e2e8f0;
             --code-bg: #1e293b;
             --code-text: #f8fafc;
+            --success: #10b981;
+            --warning: #f59e0b;
         }
 
         * {
@@ -36,9 +38,9 @@
             display: flex;
         }
 
-        /* Sidebar Navigation */
+        /* Sidebar */
         nav {
-            width: 300px;
+            width: 320px;
             height: 100vh;
             background: var(--surface);
             border-right: 1px solid var(--border);
@@ -49,140 +51,132 @@
 
         nav h2 {
             font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
             color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 2rem;
+            font-weight: 800;
+        }
+
+        nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin: 1.5rem 0 0.5rem;
         }
 
         nav ul {
             list-style: none;
         }
 
-        nav ul li {
-            margin-bottom: 0.75rem;
-        }
-
         nav ul li a {
             text-decoration: none;
             color: var(--text-muted);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.2s;
+            font-size: 0.9rem;
             display: block;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem;
             border-radius: 0.5rem;
+            transition: all 0.2s;
         }
 
         nav ul li a:hover {
+            background: var(--primary-light);
             color: var(--primary);
-            background: #eff6ff;
         }
 
         nav ul li.active a {
+            background: var(--primary-light);
             color: var(--primary);
-            background: #eff6ff;
             font-weight: 600;
         }
 
         /* Main Content */
         main {
-            margin-left: 300px;
-            width: calc(100% - 300px);
-            padding: 4rem 10%;
-            max-width: 1400px;
+            margin-left: 320px;
+            width: calc(100% - 320px);
+            padding: 4rem 8%;
+            max-width: 1200px;
         }
 
         section {
-            margin-bottom: 4rem;
-            scroll-margin-top: 4rem;
+            margin-bottom: 6rem;
+            scroll-margin-top: 2rem;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.05em;
             font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.025em;
         }
 
         h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 1.25rem;
-            margin-top: 2rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
             border-bottom: 2px solid var(--border);
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.75rem;
+            font-weight: 700;
         }
 
         h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            margin-top: 1.5rem;
             color: var(--primary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
         }
 
         p {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
             color: var(--text-muted);
         }
 
-        .highlight-box {
-            background: #eff6ff;
-            border-left: 4px solid var(--primary);
-            padding: 1.5rem;
-            border-radius: 0 0.75rem 0.75rem 0;
-            margin: 2rem 0;
+        /* Components */
+        .req-list {
+            list-style: none;
+            margin-bottom: 2rem;
         }
 
-        /* Code Blocks */
-        pre {
-            background: var(--code-bg);
-            color: var(--code-text);
+        .req-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 1.5rem;
-            border-radius: 0.75rem;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            font-family: 'Fira Code', monospace;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .req-status {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--success);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .req-content h4 {
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .req-content p {
             font-size: 0.9rem;
-            position: relative;
+            margin-bottom: 0;
         }
 
-        pre::before {
-            content: attr(data-lang);
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.25rem 0.75rem;
-            font-size: 0.7rem;
-            border-radius: 0 0.75rem 0 0.75rem;
-            text-transform: uppercase;
-        }
-
-        code {
-            font-family: 'Fira Code', monospace;
-            background: #f1f5f9;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.25rem;
-            font-size: 0.9em;
-        }
-
-        /* Tech Badges */
         .badge {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
             margin-right: 0.5rem;
-        }
-
-        .badge-flutter {
-            background: #02569b;
-            color: white;
+            vertical-align: middle;
         }
 
         .badge-android {
@@ -195,59 +189,118 @@
             color: white;
         }
 
-        /* Tutorial Flow Indicators */
-        .step {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
+        .badge-flutter {
+            background: #02569b;
+            color: white;
         }
 
-        .step-number {
+        .code-container {
+            margin: 2rem 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #f1f5f9;
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-path {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        pre {
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            background: var(--code-bg);
+            color: var(--code-text);
+            margin: 0;
+        }
+
+        .walkthrough-step {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-num {
             flex-shrink: 0;
             width: 40px;
             height: 40px;
+            border-radius: 50%;
             background: var(--primary);
             color: white;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 1.2rem;
         }
 
-        .step-content {
+        .step-body {
             flex-grow: 1;
         }
 
-        /* Footer */
+        .highlight-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--surface);
+        }
+
+        th,
+        td {
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #f8fafc;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
         footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
+            margin-top: 8rem;
+            padding: 4rem 0;
             border-top: 1px solid var(--border);
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.875rem;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 1024px) {
             nav {
-                width: 240px;
+                width: 260px;
             }
 
             main {
-                margin-left: 240px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                display: none;
-            }
-
-            main {
-                margin-left: 0;
-                width: 100%;
-                padding: 2rem;
+                margin-left: 260px;
             }
         }
     </style>
@@ -255,384 +308,328 @@
 
 <body>
     <nav>
-        <h2>📚 Hybrid Docs</h2>
+        <h2>eSewa Hybrid Docs</h2>
+
+        <h3>Overview</h3>
         <ul>
-            <li><a href="#overview">Project Overview</a></li>
-            <li><a href="#requirements">Requirement Solving</a></li>
-            <li><a href="#flutter">Phase 1: Flutter Module</a></li>
-            <li><a href="#android">Phase 2: Android Native</a></li>
-            <li><a href="#ios">Phase 3: iOS Native</a></li>
-            <li><a href="#bridging">Phase 4: Communication Bridge</a></li>
-            <li><a href="#security">Phase 5: 10x Security Hardening</a></li>
-            <li><a href="#audit">Requirement Audit</a></li>
-            <li><a href="#summary">Architecture Summary</a></li>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#requirements">Exact Requirements</a></li>
+        </ul>
+
+        <h3>Requirement Mapping</h3>
+        <ul>
+            <li><a href="#mapping-arch">Architecture & Specs</a></li>
+            <li><a href="#mapping-auth">Auth & Navigation</a></li>
+            <li><a href="#mapping-flutter">Flutter Core</a></li>
+            <li><a href="#mapping-payment">Payment Flow</a></li>
+        </ul>
+
+        <h3>Code Page Walkthrough</h3>
+        <ul>
+            <li><a href="#page-android">Android (Kotlin)</a></li>
+            <li><a href="#page-ios">iOS (Swift)</a></li>
+            <li><a href="#page-flutter">Flutter (Dart)</a></li>
+        </ul>
+
+        <h3>Senior Audit</h3>
+        <ul>
+            <li><a href="#security">Security Hardening</a></li>
         </ul>
     </nav>
 
     <main>
-        <section id="overview">
-            <h1>Hybrid Native + Flutter Architecture</h1>
-            <p>Welcome to the implementation documentation for the <strong>eSewa Hybrid Subscrition App</strong>. This
-                project demonstrates a high-performance integration where native Android and iOS applications host a
-                shared Flutter module.</p>
+        <section id="intro">
+            <h1>Hybrid Project Documentation</h1>
+            <p>A comprehensive guide to the eSewa Hybrid Mobile Application, documenting how the native Android and iOS
+                applications integrate with a shared Flutter module.</p>
 
             <div class="highlight-box">
-                <strong>Why Hybrid?</strong><br>
-                It allows us to keep sensitive logic like authentication and security in native code while sharing
-                complex UI components like product lists and detail pages across platforms using Flutter.
-            </div>
-
-            <div style="margin-top: 2rem;">
-                <span class="badge badge-android">Android SDK 35</span>
-                <span class="badge badge-ios">iOS 12.0+</span>
-                <span class="badge badge-flutter">Flutter 3.x</span>
+                <strong>Project Goal:</strong> Build a high-performance, secure hybrid app where sensitive logic
+                (Auth/Session) stays native, while complex UI code (Product List/Detail) is shared via Flutter.
             </div>
         </section>
 
         <section id="requirements">
-            <h2>Requirement Solving</h2>
-            <p>This project was designed to solve several key business and technical requirements:</p>
+            <h2>Exact Requirements (project.pdf)</h2>
+            <p>The following exact requirements were extracted from the project specification document:</p>
 
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Secure Native Authentication</h3>
-                    <p><strong>Requirement:</strong> Ensure user authentication is handled natively for better security
-                        integration.</p>
-                    <p><strong>Solution:</strong> Both Android and iOS implement a native <code>LoginActivity</code> and
-                        <code>LoginView</code>. Only after a successful login is the unique session UUID generated and
-                        passed to the Flutter module.
-                    </p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Unified Product Catalog</h3>
-                    <p><strong>Requirement:</strong> Maintain a single UI codebase for complex product browsing and
-                        detail views.</p>
-                    <p><strong>Solution:</strong> The <code>flutter_product_module</code> contains all the Dart code for
-                        product listing and detail screens. This ensures a consistent user experience on both platforms
-                        with zero UI duplication.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Dynamic Theming</h3>
-                    <p><strong>Requirement:</strong> The Flutter module must adapt to the design system dictated by the
-                        native app.</p>
-                    <p><strong>Solution:</strong> Upon initialization, the native layer sends an <code>AppConfig</code>
-                        object via <code>MethodChannel</code>. This contains colors, spacing, and typography tokens
-                        which Flutter uses to build its theme dynamically.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="flutter">
-            <h2>Phase 1: Flutter Module Development</h2>
-            <p>The core of the application logic resides in the Flutter module. It uses <code>Riverpod</code> for state
-                management and <code>Dio</code> for networking.</p>
-
-            <h3>How the Flutter Entry Point Works</h3>
-            <p>The module supports two entry points: a default one for debugging and a <code>mainWithConfig</code> for
-                native integration.</p>
-
-            <pre data-lang="dart">
-// lib/main.dart
-@pragma('vm:entry-point')
-void mainWithConfig(Map&lt;String, dynamic&gt; initialConfig) {
-  runApp(FlutterModuleApp(initialConfig: initialConfig));
-}
-
-class FlutterModuleApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ProviderScope(
-      overrides: [
-        if (initialConfig != null)
-          initialConfigProvider.overrideWithValue(initialConfig),
-      ],
-      child: MaterialApp(home: ProductListScreen()),
-    );
-  }
-}</pre>
-            <p><strong>Logic:</strong> The <code>ProviderScope</code> override allows us to inject the native
-                configuration immediately, making it available throughout the widget tree before any screen is rendered.
-            </p>
-
-            <h3>Product List Screen</h3>
-            <p>Displays a grid of products fetched from <code>FakeStoreAPI</code>. It uses
-                <code>productListProvider</code> to handle the asynchronous state (Loading, Data, Error).
-            </p>
-            <pre data-lang="dart">
-final productsAsync = ref.watch(productListProvider);
-final configAsync = ref.watch(appConfigProvider);
-
-return configAsync.when(
-  data: (config) => Scaffold(
-    appBar: AppBar(
-      title: Text('Products'),
-      backgroundColor: _parseColor(config.colors.primary),
-    ),
-    body: productsAsync.when(...)
-  )
-);</pre>
-        </section>
-
-        <section id="android">
-            <h2>Phase 2: Android Native Implementation</h2>
-            <p>The Android side is built with Kotlin and uses a "Pre-warmed" Flutter Engine for instant transitions.</p>
-
-            <h3>The Pre-warmed Engine</h3>
-            <p>In the <code>App.kt</code> class, we initialize the Flutter engine as soon as the application starts.</p>
-            <pre data-lang="kotlin">
-// App.kt
-flutterEngine = FlutterEngine(this).apply {
-    dartExecutor.executeDartEntrypoint(
-        DartExecutor.DartEntrypoint.createDefault()
-    )
-}
-// Cache it for later use
-FlutterEngineCache.getInstance().put(FLUTTER_ENGINE_ID, flutterEngine)</pre>
-            <p><strong>Benefit:</strong> This eliminates the 1-2 second "white screen" or delay that usually occurs when
-                starting a Flutter module, as the VM is already running in the background.</p>
-
-            <h3>Passing Data to Flutter</h3>
-            <p>When Flutter calls <code>getAppConfig</code>, Android responds with a Map containing the current session
-                UUID and theme tokens.</p>
-            <pre data-lang="kotlin">
-private fun buildAppConfig(): Map&lt;String, Any&gt; {
-    val uuid = getSharedPreferences("AppPrefs", MODE_PRIVATE).getString("uuid", "")
-    return mapOf(
-        "uuid" to uuid,
-        "themeMode" to "light",
-        "colors" to mapOf("primary" to "#2196F3")
-    )
-}</pre>
-        </section>
-
-        <section id="ios">
-            <h2>Phase 3: iOS Native Implementation</h2>
-            <p>On iOS, we use <code>SwiftUI</code> and a <code>FlutterManager</code> singleton to manage the lifecycle
-                of the Flutter engine.</p>
-
-            <h3>FlutterManager Singleton</h3>
-            <p>Similar to Android's App class, this manager handles the engine setup and MethodChannel communication.
-            </p>
-            <pre data-lang="swift">
-// FlutterManager.swift
-class FlutterManager: NSObject, ObservableObject {
-    static let shared = FlutterManager()
-    
-    func setupEngine() {
-        flutterEngine = FlutterEngine(name: "esewa_flutter_engine")
-        flutterEngine?.run()
-        
-        methodChannel = FlutterMethodChannel(
-            name: "com.app.native/flutter",
-            binaryMessenger: engine.binaryMessenger
-        )
-    }
-}</pre>
-
-            <h3>Hosting the Flutter View</h3>
-            <p>In SwiftUI, we warp the <code>FlutterViewController</code> using
-                <code>UIViewControllerRepresentable</code>. This allows us to use the Flutter module as a standard
-                SwiftUI <code>View</code>.
-            </p>
-            <pre data-lang="swift">
-// FlutterView.swift
-struct FlutterView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> FlutterViewController {
-        let engine = FlutterManager.shared.flutterEngine!
-        return FlutterViewController(engine: engine, nibName: nil, bundle: nil)
-    }
-    func updateUIViewController(_ uiViewController: FlutterViewController, context: Context) {}
-}</pre>
-
-            <h3>The User Interface (ContentView)</h3>
-            <p>The main screen of the iOS app remains native, providing a entry point to the Flutter module via a
-                SwiftUI sheet.</p>
-            <pre data-lang="swift">
-// ContentView.swift
-struct ContentView: View {
-    @State private var showFlutterModule = false
-    
-    var body: some View {
-        Button("Open Flutter Module") {
-            showFlutterModule = true
-        }
-        .sheet(isPresented: $showFlutterModule) {
-            FlutterView()
-        }
-    }
-}</pre>
-        </section>
-
-        <section id="bridging">
-            <h2>Phase 4: The Communication Bridge</h2>
-            <p>The <code>MethodChannel</code> is the glue that holds everything together. It allows for
-                <strong>Bidirectional</strong> communication.
-            </p>
-
-            <div class="highlight-box">
-                <strong>Direction 1: Native → Flutter (Pull)</strong><br>
-                Flutter requests config: <code>_channel.invokeMethod('getAppConfig')</code>. Native responds with the
-                JSON equivalent.
-            </div>
-
-            <div class="highlight-box">
-                <strong>Direction 2: Flutter → Native (Push)</strong><br>
-                User clicks 'Pay Now': Flutter pushes the payload:
-                <code>_channel.invokeMethod('initiatePayment', payload)</code>. Native receives and starts the payment
-                process.
-            </div>
-
-            <h3>Implementation in Flutter</h3>
-            <pre data-lang="dart">
-// lib/services/native_channel_service.dart
-class NativeChannelService {
-  static const MethodChannel _channel = MethodChannel('com.app.native/flutter');
-
-  Future&lt;AppConfig&gt; getAppConfig() async {
-    final Map config = await _channel.invokeMethod('getAppConfig');
-    return AppConfig.fromJson(Map&lt;String, dynamic&gt;.from(config));
-  }
-}</pre>
-        </section>
-
-        <section id="security">
-            <h2>Phase 5: 10x Security Hardening</h2>
-            <p>A Senior Developer ensures that financial applications meet "Bank-Grade" security standards. Below are
-                the hardening measures implemented.</p>
-
-            <div class="step">
-                <div class="step-number">🛡️</div>
-                <div class="step-content">
-                    <h3>Encrypted Persistent Storage</h3>
-                    <p>Standard <code>SharedPreferences</code> store data in XML files that can be read on rooted
-                        devices. We've upgraded to <strong>EncryptedSharedPreferences</strong>.</p>
-                    <pre data-lang="kotlin">
-// SecurityProvider.kt
-fun getEncryptedPrefs(context: Context): SharedPreferences {
-    val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-    return EncryptedSharedPreferences.create(
-        "secure_prefs", masterKeyAlias, context,
-        AES256_SIV, AES256_GCM
-    )
-}</pre>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">🔒</div>
-                <div class="step-content">
-                    <h3>Production Log Stripping</h3>
-                    <p>Logging sensitive UUIDs or API payloads in production is a major data leakage risk. We use
-                        <code>kDebugMode</code> to gate loggers.</p>
-                    <pre data-lang="dart">
-// api_client.dart
-if (kDebugMode) {
-  _dio.interceptors.add(PrettyDioLogger(...));
-}</pre>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-number">📡</div>
-                <div class="step-content">
-                    <h3>Offline Resilience (Caching)</h3>
-                    <p>To fulfill the optional but critical requirement for reliability, we implemented a persistence
-                        layer in Flutter.</p>
-                    <pre data-lang="dart">
-// api_client.dart
-try {
-    final response = await _dio.get('/products');
-    _cacheProducts(response.data);
-} catch (e) {
-    return await _getCachedProducts(); // Fallback
-}</pre>
-                </div>
-            </div>
-        </section>
-
-        <section id="audit">
-            <h2>Requirement Audit (project.pdf)</h2>
-            <p>Verification of implementation against the original project specifications.</p>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
-                <tr style="background: #e2e8f0; text-align: left;">
-                    <th style="padding: 1rem; border: 1px solid var(--border);">Requirement</th>
-                    <th style="padding: 1rem; border: 1px solid var(--border);">Status</th>
-                    <th style="padding: 1rem; border: 1px solid var(--border);">Notes</th>
-                </tr>
-                <tr>
-                    <td style="padding: 1rem; border: 1px solid var(--border);">Native Login + UUID</td>
-                    <td style="padding: 1rem; border: 1px solid var(--border); color: green;">✅ Pass</td>
-                    <td style="padding: 1rem; border: 1px solid var(--border);">Implemented with Secure Storage upgrade.
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding: 1rem; border: 1px solid var(--border);">MethodChannel Bridge</td>
-                    <td style="padding: 1rem; border: 1px solid var(--border); color: green;">✅ Pass</td>
-                    <td style="padding: 1rem; border: 1px solid var(--border);">Bidirectional (Config & Payment).</td>
-                </tr>
-                <tr>
-                    <td style="padding: 1rem; border: 1px solid var(--border);">UUID in Headers</td>
-                    <td style="padding: 1rem; border: 1px solid var(--border); color: green;">✅ Pass</td>
-                    <td style="padding: 1rem; border: 1px solid var(--border);">Using Dio Interceptors.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 1rem; border: 1px solid var(--border);">Offline Caching</td>
-                    <td style="padding: 1rem; border: 1px solid var(--border); color: green;">✅ Pass</td>
-                    <td style="padding: 1rem; border: 1px solid var(--border);">Hybrid cache (Memory + Local Storage).
-                    </td>
-                </tr>
-            </table>
-        </section>
-
-        <section id="summary">
-            <h2>Architecture Summary</h2>
-            <p>This tutorial flow highlights how the code blocks across three different environments (Dart, Kotlin,
-                Swift) relate to each other:</p>
-            <ul>
-                <li><strong>State Flow:</strong> Native Auth → UUID → MethodChannel → Flutter Config → Riverpod Provider
-                    → UI.</li>
-                <li><strong>UI Flow:</strong> Native Activity/View → Flutter View (hosted) → Product List → Product
-                    Detail.</li>
-                <li><strong>Action Flow:</strong> Button Click (Flutter) → MethodChannel → Native Log/Payment Processor.
+            <ul class="req-list">
+                <li class="req-item">
+                    <div class="req-status">✓</div>
+                    <div class="req-content">
+                        <h4>Native Platforms</h4>
+                        <p>Develop using Kotlin (Android SDK 35) and Swift (Latest) for iOS.</p>
+                    </div>
+                </li>
+                <li class="req-item">
+                    <div class="req-status">✓</div>
+                    <div class="req-content">
+                        <h4>Dynamic Theming</h4>
+                        <p>Pass Light/Dark mode, Colors, Spacing, and Typography from Native to Flutter at runtime.</p>
+                    </div>
+                </li>
+                <li class="req-item">
+                    <div class="req-status">✓</div>
+                    <div class="req-content">
+                        <h4>Navigation & Session</h4>
+                        <p>Generate & cache random UUID on login. Bypass login if cached UUID exists. Use UUID in all
+                            API Headers.</p>
+                    </div>
+                </li>
+                <li class="req-item">
+                    <div class="req-status">✓</div>
+                    <div class="req-content">
+                        <h4>Flutter Module Features</h4>
+                        <p>Implemented using Riverpod, Dio, and fakeStoreApi. Must return selected product payload to
+                            native on "Pay".</p>
+                    </div>
                 </li>
             </ul>
         </section>
 
+        <section id="mapping-arch">
+            <h2>1. Architecture & Specifications Mapping</h2>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="file-path">esewasub/app/build.gradle.kts</span>
+                    <span class="badge badge-android">Android</span>
+                </div>
+                <pre>android {
+    compileSdk = 35
+    defaultConfig {
+        minSdk = 24
+        targetSdk = 35
+    }
+}</pre>
+            </div>
+            <p class="explanation">Requirement: "CompileSDK & TargetSDK: 35". Successfully implemented in the project's
+                build script.</p>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="file-path">flutter_product_module/lib/models/app_config.dart</span>
+                    <span class="badge badge-flutter">Flutter</span>
+                </div>
+                <pre>class AppConfig with _$AppConfig {
+  const factory AppConfig({
+    required String uuid,
+    required ThemeMode themeMode,
+    required ThemeColors colors,
+    required SpacingConfig spacing,
+    required TypographyConfig typography,
+  }) = _AppConfig;
+}</pre>
+            </div>
+            <p class="explanation">Requirement: "App Configurations must include themeMode, Colors, Spacing,
+                Typography". Implemented using Freezed for type-safe config management.</p>
+        </section>
+
+        <section id="mapping-auth">
+            <h2>2. Auth & Navigation Mapping</h2>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="file-path">esewasub/app/src/main/java/com/example/esewasub/LoginActivity.kt</span>
+                    <span class="badge badge-android">Android</span>
+                </div>
+                <pre>if (AuthManager.getActiveUser(this) != null) {
+    startActivity(MainActivity.createIntent(this))
+    finish()
+}</pre>
+            </div>
+            <p class="explanation">Requirement: "If UUID cached, bypass login". The LoginActivity checks the AuthManager
+                (which wraps encrypted session storage) before rendering the UI.</p>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="file-path">esewasub/app/src/main/java/com/example/esewasub/AuthManager.kt</span>
+                    <span class="badge badge-android">Android</span>
+                </div>
+                <pre>val uuid = UUID.randomUUID().toString()
+prefs.edit().putString("uuid", uuid).apply()</pre>
+            </div>
+            <p class="explanation">Requirement: "On login success: Generate a random UUID". The AuthManager generates a
+                fresh UUID and stores it securely using EncryptedSharedPreferences.</p>
+        </section>
+
+        <section id="mapping-flutter">
+            <h2>3. Flutter Core Implementation</h2>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="file-path">flutter_product_module/lib/services/api_client.dart</span>
+                    <span class="badge badge-flutter">Flutter</span>
+                </div>
+                <pre>_dio.interceptors.add(InterceptorsWrapper(
+    onRequest: (options, handler) {
+        options.headers['X-Session-UUID'] = _uuid;
+        return handler.next(options);
+    },
+));</pre>
+            </div>
+            <p class="explanation">Requirement: "Add UUID to all API Request Headers". Implemented via Dio Interceptor,
+                ensuring the native UUID is attached the 'X-Session-UUID' key automatically.</p>
+        </section>
+
+        <section id="mapping-payment">
+            <h2>4. Payment Flow & Payload Mapping</h2>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="file-path">flutter_product_module/lib/screens/product_detail_screen.dart</span>
+                    <span class="badge badge-flutter">Flutter</span>
+                </div>
+                <pre>final payload = {
+    'productId': product.id,
+    'title': product.title,
+    'price': product.price,
+};
+await ref.read(nativeChannelServiceProvider).initiatePayment(payload);</pre>
+            </div>
+            <p class="explanation">Requirement: "On Pay click: Pass a payload with selected item back to native".
+                Triggered from the Detail Page using the NativeChannelService.</p>
+        </section>
+
+        <section id="page-android">
+            <h2>Android Page Walkthrough</h2>
+
+            <div class="walkthrough-step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h3>App.kt (The Engine Hub)</h3>
+                    <p>The core of the Android implementation. It "pre-warms" the Flutter Engine so that transitions
+                        into the Flutter module are instantaneous. It also contains <code>buildAppConfig()</code> which
+                        gathers all theme tokens from encrypted storage.</p>
+                </div>
+            </div>
+
+            <div class="walkthrough-step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h3>MainActivity.kt (The Bridge)</h3>
+                    <p>This class hosts the <code>FlutterActivity</code>. It sets up the <code>MethodChannel</code>
+                        named <code>com.app.native/flutter</code>. It listens for requests from Dart and delegates
+                        actions like Payment or Auth status back to native managers.</p>
+                </div>
+            </div>
+
+            <div class="walkthrough-step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h3>LoginActivity.kt (Auth Entry)</h3>
+                    <p>A native Jetpack Compose screen. It handles user registration and login. It uses SHA-256 for
+                        password hashing and stores credentials in <code>EncryptedSharedPreferences</code> for maximum
+                        security.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-ios">
+            <h2>iOS Page Walkthrough</h2>
+
+            <div class="walkthrough-step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h3>FlutterManager.swift (Engine lifecycle)</h3>
+                    <p>Acts as the bridge between SwiftUI and Flutter. It manages the <code>FlutterEngine</code> and the
+                        <code>FlutterMethodChannel</code>. It ensures that whenever the app state changes (like theme
+                        toggle), the Flutter module is updated via <code>refreshConfig()</code>.</p>
+                </div>
+            </div>
+
+            <div class="walkthrough-step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h3>LoginView.swift (Native UI)</h3>
+                    <p>A SwiftUI based login screen. It follows the same flow as Android: checks Keychain for existing
+                        UUID, generates new session data on success, and transitions to the main view.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-flutter">
+            <h2>Flutter Page Walkthrough</h2>
+
+            <div class="walkthrough-step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h3>main.dart (Hybrid Entry)</h3>
+                    <p>Uses <code>@pragma('vm:entry-point')</code> to define <code>mainWithConfig</code>. This allows
+                        the native platform to start the module while passing the entire configuration JSON directly
+                        into Riverpod's <code>initialConfigProvider</code>.</p>
+                </div>
+            </div>
+
+            <div class="walkthrough-step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h3>product_list_screen.dart (The Catalog)</h3>
+                    <p>Uses <code>productListProvider</code> to fetch data from fakestoreapi. It displays a clean,
+                        responsive list using the spacing and color tokens received from the native host.</p>
+                </div>
+            </div>
+
+            <div class="walkthrough-step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h3>api_client.dart (The Networker)</h3>
+                    <p>An advanced Dio client implementation. It features <strong>Offline Caching</strong> (saving JSON
+                        to SharedPreferences) and <strong>Secure Logging</strong> (stripping sensitive data in
+                        production).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="security">
+            <h2>Senior Security Audit</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Implementation</th>
+                        <th>Standard Met</th>
+                        <th>File Reference</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Encrypted Persistence</td>
+                        <td>AES-256-GCM / iOS Keychain</td>
+                        <td><code>SecurityProvider.kt</code> / <code>KeychainHelper.swift</code></td>
+                    </tr>
+                    <tr>
+                        <td>Password Hashing</td>
+                        <td>SHA-256 Salting</td>
+                        <td><code>AuthManager.kt</code></td>
+                    </tr>
+                    <tr>
+                        <td>Log Stripping</td>
+                        <td>Production Gate</td>
+                        <td><code>api_client.dart</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
         <footer>
-            <p>&copy; 2026 Hybrid App Development Guide. Built with ❤️ for eSewa.</p>
+            <p>&copy; 2026 eSewa Hybrid Implementation Guide. Documentation v2.0</p>
         </footer>
     </main>
 
     <script>
-        // Simple active state for navigation
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav ul li a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute('id');
+        // Intersection Observer for Sidebar Active State
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('nav ul li').forEach(li => li.classList.remove('active'));
+                    const id = entry.target.getAttribute('id');
+                    const link = document.querySelector(`nav ul li a[href="#${id}"]`);
+                    if (link) link.parentElement.classList.add('active');
                 }
             });
+        }, { threshold: 0.5 });
 
-            navLinks.forEach(a => {
-                a.parentElement.classList.remove('active');
-                if (a.getAttribute('href').includes(current)) {
-                    a.parentElement.classList.add('active');
-                }
-            });
-        });
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
     </script>
 </body>
 

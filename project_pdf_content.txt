@@ -1,0 +1,114 @@
+Objective
+Develop a native mobile application (Android & iOS) that embeds a Flutter module, passing
+runtime configurations such as theming, UUID/session , and typography. The Flutter
+module should display a list and allow navigation to detail screens, support an external
+payment flow and return payloads back to the native side.
+Here’s a clean, formatted version of your assignment for better clarity and execution. This
+can be shared as a task document or a project brief with a team:
+
+Native App (Android & iOS)
+Requirements
+•
+•
+•
+•
+
+Native Platforms: Android (Kotlin), iOS (Swift)
+Android SDK:
+o CompileSDK & TargetSDK: 35
+iOS:
+o Latest Swift version supported
+UI/UX:
+o Support dynamic theming (Light/Dark)
+o Basic, minimal styling attributes
+
+Navigation Flow
+1. Launch App
+a. If UUID is already generated & cached, bypass login and directly load the
+Flutter module
+b. Else, show the Login Screen
+2. Login Screen
+a. Simple form with basic validation
+b. On success:
+i. Generate a random UUID
+ii. Pass app configurations + UUID to the Flutter module
+iii. Load the Flutter module
+
+Flutter Module
+Pre-load Logic
+•
+•
+
+Cache the UUID received from the native side (on login success)
+Load the app based on the app configurations passed
+
+App Configurations
+Must include:
+•
+•
+
+•
+
+themeMode: light | dark
+Theming properties:
+o Colors
+o Spacing attributes
+Typography settings
+
+Navigation & Architecture
+•
+•
+•
+•
+•
+
+Use state management of your choice (e.g., Provider, Riverpod, Bloc, etc.)
+Ensure UI responsiveness and visual similarity with the native side
+Use a network library (e.g., Dio, http)
+Log API calls
+Add UUID to all API Request Headers
+
+Features
+List Page
+•
+•
+
+Use any public sample REST API
+o Example: https://fakestoreapi.com
+Display a list of items/products
+
+Detail Page
+•
+•
+•
+
+Navigate to a Detail Page on list item tap
+Show details of the selected item
+Include a "Pay" button
+
+Pay Action
+•
+
+On "Pay" button click:
+o Return to Native app
+o Pass a payload with the selected item
+
+Deliverables
+1. Shareable Git Repository with:
+a. Native Android + iOS code
+b. Flutter module
+2. Debug Builds:
+a. APK (Android)
+b. IPA (iOS)
+c. Upload both to Google Drive or a similar platform & share links
+
+Optional Enhancements
+•
+•
+•
+
+UI/UX polish and animations
+Error handling and loading states
+Offline caching of list data
+
+
