@@ -10,7 +10,7 @@ object AuthManager {
 
     fun register(context: Context, id: String, pass: String): Boolean {
         val prefs = SecurityProvider.getEncryptedPrefs(context)
-        if (prefs.contains("user_$id")) return false // User already exists
+        if (prefs.contains("user_$id")) return false // user already exists
 
         val hashedPass = hashPassword(pass)
         val uuid = UUID.randomUUID().toString()
@@ -29,8 +29,16 @@ object AuthManager {
         
         if (hashPassword(pass) == storedHash) {
             val uuid = prefs.getString("uuid_$id", null) ?: UUID.randomUUID().toString()
+            
             prefs.edit().putString(ACTIVE_USER, id).apply()
-            prefs.edit().putString("uuid", uuid).apply() // Current session UUID
+            prefs.edit().putString("uuid", uuid).apply() // current session uuid
+            
+            /*
+         
+            context.getSharedPreferences("session", Context.MODE_PRIVATE)
+                .edit().putString("uid", uuid).apply()
+            */
+            
             return uuid
         }
         return null

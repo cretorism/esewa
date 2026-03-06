@@ -13,7 +13,7 @@ class AuthManager {
     
     func register(id: String, pass: String) -> Bool {
         if KeychainHelper.shared.read(service: service, account: "user_\(id)") != nil {
-            return false // User already exists
+            return false // user already exists
         }
         
         let hashedPass = hashPassword(pass)
@@ -33,7 +33,8 @@ class AuthManager {
         if hashPassword(pass) == storedHash {
             let uuid = KeychainHelper.shared.read(service: service, account: "uuid_\(id)") ?? UUID().uuidString
             UserDefaults.standard.set(id, forKey: activeUserKey)
-            KeychainHelper.shared.save(uuid, service: service, account: "user_uuid") // Current session UUID
+            KeychainHelper.shared.save(uuid, service: service, account: "user_uuid") // current session uuid
+            
             FlutterManager.shared.refreshConfig()
             return uuid
         }

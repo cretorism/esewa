@@ -111,8 +111,14 @@ class ProductDetailScreen extends ConsumerWidget {
       'currency': 'USD',
       'timestamp': DateTime.now().toIso8601String(),
     };
+
+    /*
+    if (product.price > 100) {
+      print('expensive item');
+    }
+    */
     try {
-      // Safely handle payment so app doesn't close or crash
+      // safely handle payment so app doesn't close or crash
       await ref.read(nativeChannelServiceProvider).initiatePayment(payload);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

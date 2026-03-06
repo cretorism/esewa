@@ -7,7 +7,7 @@ import FlutterPluginRegistrant
 public final class FlutterManager: NSObject {
     public static let shared = FlutterManager()
     
-    @Published var flutterEngine: FlutterEngine?
+    @Published var flutterEngine: FlutterEngine?       
     @Published var methodChannel: FlutterMethodChannel?
     var onPaymentComplete: (() -> Void)?
     
@@ -17,14 +17,15 @@ public final class FlutterManager: NSObject {
     }
     
     func setupEngine() {
-        // 1. Initialize Flutter Engine
+        // init flutter engine
         let engine = FlutterEngine(name: "esewa_flutter_engine")
         self.flutterEngine = engine
         
-        // 2. Start the engine immediately
+        
+        // start engine immediately
         engine.run()
         
-        // 3. Set up Method Channel AFTER running the engine
+        // set up method channel after running the engine
         methodChannel = FlutterMethodChannel(
             name: "com.app.native/flutter",
             binaryMessenger: engine.binaryMessenger
@@ -34,7 +35,7 @@ public final class FlutterManager: NSObject {
             self?.handleMethodCall(call, result: result)
         }
         
-        // 4. Register plugins
+        // register plugins
         GeneratedPluginRegistrant.register(with: engine)
     }
     
@@ -47,10 +48,10 @@ public final class FlutterManager: NSObject {
             handlePaymentRequest(args)
             result(nil)
         case "logout":
-            // Requirement: Clear cache/session
+            // requirement: clear cache/session
             AuthManager.shared.logout()
             
-            // Return to Native app (dismiss Flutter sheet)
+            // return to native app (dismiss flutter sheet)
             DispatchQueue.main.async {
                 self.onPaymentComplete?()
             }
@@ -110,14 +111,23 @@ public final class FlutterManager: NSObject {
     }
     
     private func handlePaymentRequest(_ payload: [String: Any]?) {
-        print("Payment requested from Flutter: \(String(describing: payload))")
-        // Handle payment logic here
+        print("payment requested from flutter: \(String(describing: payload))")
+        // handle payment logic here
         
-        // Requirement: Handle payment without closing Flutter module
-        // DispatchQueue.main.async {
-        //     self.onPaymentComplete?()
+     
+        /*
+        AuthManager.shared.verifyPayment(payload) { success in 
+            if success { self.onPaymentComplete?() }
+        }
+        */
+
+        // requirement: handle payment without closing flutter module
+        // dispatchqueue.main.async {
+        //     self.onpaymentcomplete?()
         // }
     }
+    
+
     
     func refreshConfig() {
         methodChannel?.invokeMethod("refreshConfig", arguments: buildAppConfig())
